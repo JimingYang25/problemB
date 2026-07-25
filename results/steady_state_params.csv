@@ -1,0 +1,4 @@
+﻿变量,平衡值 X_eq,调整速率 r (day⁻¹),初始值 X0,R²,稳定?,模型
+面积 A (m²),2880.85,0.002793,507.33,0.3272,True,Logistic growth
+宽深比 ξ,1254.1522,1e-05,487.2947,0.0021,True,Exponential approach
+形态熵 H (nats),5.79233,2.7e-05,2.504565,0.08,True,Exponential approach
