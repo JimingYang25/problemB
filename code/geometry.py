@@ -1,10 +1,11 @@
 """
-Module 2: Geometric Indicators Calculation
+Module 2: Geometric Indicators Calculation (v4 — 5 indicators)
 Calculate for each cross-section:
   - A: Cross-sectional area below reference level
   - B: Water surface width
-  - ξ: Width-depth ratio (B²/A)
+  - xi: Width-depth ratio (B^2/A)
   - H: Morphological entropy
+  - z_min: Thalweg elevation (minimum bed elevation)
 
 Reference water level Z_ref = 43m (fixed per README)
 """
@@ -155,16 +156,19 @@ def calculate_all_indicators(
         B = calculate_surface_width(x, z, z_ref)
         xi = B * B / A if A > 0 else float('inf')
         H = calculate_morphological_entropy(x, z, z_ref)
+        z_min = np.min(z)  # thalweg elevation
 
         results.append({
             '测量日期': date,
-            'A_面积(m²)': round(A, 2),
+            'A_面积(m^2)': round(A, 2),
             'B_水面宽(m)': round(B, 2),
-            'ξ_宽深比': round(xi, 4),
-            'H_形态熵(nats)': round(H, 6)
+            'xi_宽深比': round(xi, 4),
+            'H_形态熵(nats)': round(H, 6),
+            'z_min_深泓(m)': round(z_min, 4)
         })
 
-        print(f"  [{date}] A={A:.1f} m^2, B={B:.1f} m, xi={xi:.2f}, H={H:.4f} nats")
+        print(f"  [{date}] A={A:.1f} m^2, B={B:.1f} m, xi={xi:.2f}, "
+              f"H={H:.4f} nats, z_min={z_min:.2f} m")
 
     df = pd.DataFrame(results)
     return df
@@ -172,21 +176,23 @@ def calculate_all_indicators(
 
 def calculate_deltas(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Calculate ΔA_i and Δξ_i between adjacent cross-sections.
+    Calculate delta values for all 5 indicators between adjacent cross-sections.
 
-    Returns DataFrame with 8 rows of deltas.
+    Returns DataFrame with 8 rows.
     """
     deltas = []
-    for i in range(len(df) - 1):
-        dA = df.iloc[i + 1]['A_面积(m²)'] - df.iloc[i]['A_面积(m²)']
-        dxi = df.iloc[i + 1]['ξ_宽深比'] - df.iloc[i]['ξ_宽深比']
+    cols = ['A_面积(m^2)', 'B_水面宽(m)', 'xi_宽深比',
+            'H_形态熵(nats)', 'z_min_深泓(m)']
+    delta_names = ['dA', 'dB', 'dxi', 'dH', 'dz_min']
 
-        deltas.append({
+    for i in range(len(df) - 1):
+        row = {
             '起始日期': df.iloc[i]['测量日期'],
-            '结束日期': df.iloc[i + 1]['测量日期'],
-            'ΔA': round(dA, 2),
-            'Δξ': round(dxi, 4)
-        })
+            '结束日期': df.iloc[i + 1]['测量日期']
+        }
+        for col, dname in zip(cols, delta_names):
+            row[dname] = round(df.iloc[i + 1][col] - df.iloc[i][col], 6)
+        deltas.append(row)
 
     return pd.DataFrame(deltas)
 
