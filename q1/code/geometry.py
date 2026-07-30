@@ -198,7 +198,7 @@ def calculate_deltas(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    from preprocess import load_cross_sections, process_all_sections
+    from q1.code.preprocess import load_cross_sections, process_all_sections
 
     data_dir = Path(__file__).parent.parent / 'data_csv'
     output_dir = Path(__file__).parent.parent / 'data'

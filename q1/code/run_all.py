@@ -12,13 +12,13 @@ sys.path.insert(0, str(Path(__file__).parent))
 import numpy as np
 import pandas as pd
 
-from preprocess import load_cross_sections, process_all_sections, save_processed_data
-from geometry import calculate_all_indicators, calculate_deltas, Z_REF
-from driving_factors import load_hydro_data, reconstruct_sediment, to_daily
-from driving_factors import extract_features, select_features_for_target
-from drm_model import fit_drm_all_targets
-from ensemble import run_ensemble_for_target, run_ensemble_all_targets
-from bootstrap import bootstrap_r2, bootstrap_all_targets, save_bootstrap_results
+from q1.code.preprocess import load_cross_sections, process_all_sections, save_processed_data
+from q1.code.geometry import calculate_all_indicators, calculate_deltas, Z_REF
+from q1.code.driving_factors import load_hydro_data, reconstruct_sediment, to_daily
+from q1.code.driving_factors import extract_features, select_features_for_target
+from q1.code.drm_model import fit_drm_all_targets
+from q1.code.ensemble import run_ensemble_for_target, run_ensemble_all_targets
+from q1.code.bootstrap import bootstrap_r2, bootstrap_all_targets, save_bootstrap_results
 
 DATA_DIR = Path(__file__).parent.parent / 'data_csv'
 DATA_OUT = Path(__file__).parent.parent / 'data'

@@ -1,0 +1,6 @@
+sigma^2 = 0.130289
+ell = 34.6432 m
+R^2 = 0.2066
+noise_var = 0.019543
+section_width = 484 m
+VoI definition: conditional variance ratio

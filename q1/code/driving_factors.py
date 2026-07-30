@@ -225,7 +225,7 @@ def main():
     print(f"  Daily aggregation: {len(daily)} days")
 
     # Get cross-section dates
-    from preprocess import load_cross_sections
+    from q1.code.preprocess import load_cross_sections
     sections_file = data_dir / '附件2_9个断面地形数据.csv'
     sections = load_cross_sections(str(sections_file))
     section_dates = sorted(sections.keys())

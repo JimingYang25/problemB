@@ -178,8 +178,8 @@ def plot_loocv(predictions: dict, output_path: str):
 
 
 def main():
-    from preprocess import load_cross_sections, process_all_sections
-    from geometry import calculate_all_indicators
+    from q1.code.preprocess import load_cross_sections, process_all_sections
+    from q1.code.geometry import calculate_all_indicators
     from ode_model import fit_all_steady_state
 
     data_dir = Path(__file__).parent.parent / 'data_csv'
@@ -214,7 +214,7 @@ def main():
 
     # Plot 3: LOOCV (needs full pipeline)
     print("\n--- Figure 3: LOOCV ---")
-    from loocv import main as loocv_main
+    from q1.code.loocv import main as loocv_main
     metrics_A, metrics_xi, predictions = loocv_main()
     plot_loocv(
         predictions,
