@@ -1,0 +1,8 @@
+{
+  "sediment_mean_log_R2": 0.4901,
+  "sediment_mean_log_RMSE": 0.4601800000000001,
+  "drm_n_folds": 48,
+  "best_4pt_shutdown": "(3, 5, 6, 7)",
+  "hybrid_mean_APE": 25.582,
+  "fixed_mean_APE": 29.477999999999998
+}

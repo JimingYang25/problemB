@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs ls -lt)",
+      "Bash(PYTHONIOENCODING=utf-8 python code/revised_analysis.py)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
